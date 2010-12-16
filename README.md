@@ -13,14 +13,14 @@ gem install bleacher_api
 Methods
 -------
 
-== POST /api/authenticate/login
+## POST /api/authenticate/login
 
-=== Parameters
+### Parameters
 
 * email
 * password
 
-=== Returns
+### Returns
 
 A user object with the following keys:
 
@@ -31,35 +31,35 @@ A user object with the following keys:
 * permalink
 * token
 
-=== Example
+### Example
 
 <pre>
 BleacherApi::Authenticate.login('email', 'password')
 </pre>
 
-== GET /api/geolocation/teams
+## GET /api/geolocation/teams
 
-=== Parameters
+### Parameters
 
 * city
 
-=== Returns
+### Returns
 
 An array of team permalinks.
 
-=== Example
+### Example
 
 <pre>
 BleacherApi::Geolocation.teams('Dallas')
 </pre>
 
-== GET /api/stream/first
+## GET /api/stream/first
 
-=== Parameters
+### Parameters
 
 * tags - comma-delimited list of tag permalinks
 
-=== Returns
+### Returns
 
 An object whose keys are the permalinks passed in via the <code>tags</code> parameter.
 
@@ -71,19 +71,19 @@ Each value of that object is another object with the following keys:
 
 This object represents the first item in that team's stream.
 
-=== Example
+### Example
 
 <pre>
 BleacherApi::Stream.first('san-francisco-49ers')
 </pre>
 
-== GET /api/user/user
+## GET /api/user/user
 
-=== Parameters
+### Parameters
 
 * token - Token obtained from <code>/api/authenticate/login</code>
 
-=== Returns
+### Returns
 
 A user object with the following keys:
 
@@ -94,7 +94,7 @@ A user object with the following keys:
 * permalink
 * token
 
-=== Example
+### Example
 
 <pre>
 BleacherApi::Authenticate.user('token')
