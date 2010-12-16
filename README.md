@@ -10,8 +10,8 @@ Requirements
 gem install bleacher_api
 </pre>
 
-POST /api/authenticate/login
-----------------------------
+POST /api/authenticate/login.json
+---------------------------------
 
 ### Parameters
 
@@ -35,8 +35,8 @@ A user object with the following keys:
 BleacherApi::Authenticate.login('email', 'password')
 </pre>
 
-GET /api/geolocation/teams
---------------------------
+GET /api/geolocation/teams.json
+-------------------------------
 
 ### Parameters
 
@@ -52,8 +52,8 @@ An array of team permalinks.
 BleacherApi::Geolocation.teams('Dallas')
 </pre>
 
-GET /api/stream/first
----------------------
+GET /api/stream/first.json
+--------------------------
 
 ### Parameters
 
@@ -77,8 +77,8 @@ This object represents the first item in that team's stream.
 BleacherApi::Stream.first('san-francisco-49ers')
 </pre>
 
-GET /api/user/user
-------------------
+GET /api/user/user.json
+-----------------------
 
 ### Parameters
 
