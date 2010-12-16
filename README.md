@@ -98,5 +98,5 @@ A user object with the following keys:
 ### Example
 
 <pre>
-BleacherApi::Authenticate.user('token')
+BleacherApi::User.user('token')
 </pre>
