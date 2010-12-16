@@ -1,10 +1,12 @@
 $root = File.expand_path('../../', __FILE__)
-require "#{$root}/lib/gem_template/gems"
+require "#{$root}/lib/bleacher_api/gems"
 
-GemTemplate::Gems.require(:spec)
+BleacherApi::Gems.require(:spec)
 
-require "#{$root}/lib/gem_template"
+require "#{$root}/lib/bleacher_api"
 require 'pp'
+
+BleacherApi::Config.url ENV['URL']
 
 Spec::Runner.configure do |config|
 end
@@ -14,4 +16,8 @@ def debug(object)
   puts "<pre>"
   puts object.pretty_inspect.gsub('<', '&lt;').gsub('>', '&gt;')
   puts "</pre>"
+end
+
+def only?(type)
+  ENV['ONLY'].nil? || ENV['ONLY'].downcase == type.to_s.downcase
 end

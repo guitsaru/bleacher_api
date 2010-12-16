@@ -1,36 +1,101 @@
-GemTemplate
+BleacherApi
 ===========
 
-A gem template for new projects.
+A Ruby interface to the Bleacher Report API.
 
 Requirements
 ------------
 
 <pre>
-gem install stencil
+gem install bleacher_api
 </pre>
 
-Setup the template
-------------------
+Methods
+-------
 
-You only have to do this once.
+== POST /api/authenticate/login
+
+=== Parameters
+
+* email
+* password
+
+=== Returns
+
+A user object with the following keys:
+
+* id
+* email
+* first\_name
+* last\_name
+* permalink
+* token
+
+=== Example
 
 <pre>
-git clone git@github.com:winton/gem_template.git
-cd gem_template
-stencil
+BleacherApi::Authenticate.login('email', 'password')
 </pre>
 
-Setup a new project
--------------------
+== GET /api/geolocation/teams
 
-Do this for every new project.
+=== Parameters
+
+* city
+
+=== Returns
+
+An array of team permalinks.
+
+=== Example
 
 <pre>
-mkdir my_project
-git init
-stencil gem_template
-rake rename
+BleacherApi::Geolocation.teams('Dallas')
 </pre>
 
-The last command does a find-replace (gem\_template -> my\_project) on files and filenames.
+== GET /api/stream/first
+
+=== Parameters
+
+* tags - comma-delimited list of tag permalinks
+
+=== Returns
+
+An object whose keys are the permalinks passed in via the <code>tags</code> parameter.
+
+Each value of that object is another object with the following keys:
+
+* title
+* published_at
+* image
+
+This object represents the first item in that team's stream.
+
+=== Example
+
+<pre>
+BleacherApi::Stream.first('san-francisco-49ers')
+</pre>
+
+== GET /api/user/user
+
+=== Parameters
+
+* token - Token obtained from <code>/api/authenticate/login</code>
+
+=== Returns
+
+A user object with the following keys:
+
+* id
+* email
+* first\_name
+* last\_name
+* permalink
+* token
+
+=== Example
+
+<pre>
+BleacherApi::Authenticate.user('token')
+</pre>

@@ -1,11 +1,12 @@
-unless defined?(GemTemplate::Gems)
+unless defined?(BleacherApi::Gems)
   
   require 'rubygems'
   
-  module GemTemplate
+  class BleacherApi
     class Gems
     
       VERSIONS = {
+        :httparty => '=0.5.2',
         :rake => '=0.8.7',
         :rspec => '=1.3.1'
       }
