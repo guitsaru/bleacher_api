@@ -15,8 +15,8 @@ POST /api/authenticate/login.json
 
 ### Parameters
 
-* email
-* password
+* user[email]
+* user[password]
 
 ### Returns
 
