@@ -43,10 +43,11 @@ class BleacherApi
   
   class Geolocation
     class <<self
-      def teams(city, state)
+      def teams(city, state, country)
         BleacherApi.call(:get, 'geolocation/teams', {
           :city => city,
-          :state => state
+          :state => state,
+          :country => country
         })
       end
     end

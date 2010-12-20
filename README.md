@@ -50,6 +50,7 @@ GET /api/geolocation/teams.json
 
 * city
 * state
+* country
 
 ### Returns
 
@@ -58,13 +59,13 @@ An array of team permalinks.
 ### Ruby Example
 
 <pre>
-BleacherApi::Geolocation.teams('Dallas', 'Texas')
+BleacherApi::Geolocation.teams('Dallas', 'Texas', 'USA')
 </pre>
 
 ### HTTP Example
 
 <pre>
-http://bleacherreport.com/api/geolocation/teams.json?city=Dallas&state=Texas
+http://bleacherreport.com/api/geolocation/teams.json?city=Dallas&state=Texas&country=USA
 </pre>
 
 GET /api/stream/first.json
