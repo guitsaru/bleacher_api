@@ -29,11 +29,19 @@ A user object with the following keys:
 * permalink
 * token
 
-### Example
+### Ruby Example
 
 <pre>
 BleacherApi::Authenticate.login('email', 'password')
 </pre>
+
+### HTTP Example
+
+<pre>
+http://bleacherreport.com/api/authenticate/login.json?user[email]=your@email.com&user[password]=your_password
+</pre>
+
+Please note that any request with a password should be sent as a POST, despite this example using GET.
 
 GET /api/geolocation/teams.json
 -------------------------------
@@ -46,10 +54,16 @@ GET /api/geolocation/teams.json
 
 An array of team permalinks.
 
-### Example
+### Ruby Example
 
 <pre>
 BleacherApi::Geolocation.teams('Dallas')
+</pre>
+
+### HTTP Example
+
+<pre>
+http://bleacherreport.com/api/geolocation/teams.json?city=Dallas
 </pre>
 
 GET /api/stream/first.json
@@ -71,10 +85,16 @@ Each value of that object is another object with the following keys:
 
 This object represents the first item in that team's stream.
 
-### Example
+### Ruby Example
 
 <pre>
 BleacherApi::Stream.first('san-francisco-49ers')
+</pre>
+
+### HTTP Example
+
+<pre>
+http://bleacherreport.com/api/stream/first.json?tags=san-francisco-49ers,dallas-cowboys
 </pre>
 
 GET /api/user/user.json
@@ -95,8 +115,14 @@ A user object with the following keys:
 * permalink
 * token
 
-### Example
+### Ruby Example
 
 <pre>
 BleacherApi::User.user('token')
+</pre>
+
+### HTTP Example
+
+<pre>
+http://bleacherreport.com/api/user/user.json?token=TOKEN_OBTAINED_FROM_LOGIN_GOES_HERE
 </pre>
