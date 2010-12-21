@@ -20,14 +20,7 @@ POST /api/authenticate/login.json
 
 ### Returns
 
-A user object with the following keys:
-
-* id
-* email
-* first\_name
-* last\_name
-* permalink
-* token
+Output similar to the <a href="#user_api">User API</a>.
 
 ### Ruby Example
 
@@ -118,6 +111,8 @@ BleacherApi::Stream.first('san-francisco-49ers')
 http://bleacherreport.com/api/stream/first.json?tags=san-francisco-49ers,dallas-cowboys
 </pre>
 
+<a name="user_api"></a>
+
 GET /api/user/user.json
 -----------------------
 
@@ -135,6 +130,18 @@ A user object with the following keys:
 * last\_name
 * permalink
 * token
+* api
+
+The <code>api</code> value contains extra information especially for the API. Example output:
+
+<pre>
+{
+  "teams":[
+    {"image":"dallas_mavericks.png","permalink":"dallas-mavericks"},
+    {"image":"dallas_cowboys.png","permalink":"dallas-cowboys"}
+  ]
+}
+</pre>
 
 ### Ruby Example
 

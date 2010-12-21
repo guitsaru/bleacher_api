@@ -3,7 +3,7 @@ require 'spec_helper'
 describe BleacherApi do
   
   before(:all) do
-    @user_keys = %w(id email first_name last_name permalink token)
+    @user_keys = %w(id email first_name last_name permalink token api)
   end
   
   if only?(:Authenticate)
