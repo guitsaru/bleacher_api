@@ -38,7 +38,7 @@ describe BleacherApi do
   if only?(:Geolocation)
     describe :Geolocation do
       before(:all) do
-        @response = BleacherApi::Geolocation.teams('Dallas')
+        @response = BleacherApi::Geolocation.teams(:city => 'Dallas')
         @permalinks = ["texas-rangers", "dallas-stars", "dallas-cowboys", "dallas-mavericks", "fc-dallas", "oklahoma-sooners-basketball", "texas-longhorns-basketball", "texas-am-basketball", "texas-tech-basketball", "oklahoma-state-basketball", "baylor-basketball", "oklahoma-sooners-football", "texas-longhorns-football", "texas-am-football", "texas-tech-football", "oklahoma-state-football", "baylor-football", "tcu-football", "smu-mustangs-football", "north-texas-mean-green-football"]
       end
   
