@@ -51,21 +51,40 @@ GET /api/geolocation/teams.json
 * city
 * state
 * country
+* ip - IP Address (defaults to IP of requesting machine)
+* dma - Designated Market Area code
+* limit - Limit number of results (defaults to 5)
 
 ### Returns
 
 An array of team permalinks.
 
-### Ruby Example
+### Ruby Examples
 
 <pre>
-BleacherApi::Geolocation.teams('Dallas', 'Texas', 'USA')
+BleacherApi::Geolocation.teams(
+  :city => 'Dallas',
+  :dma => 623,
+  :state => 'Texas',
+  :country => 'US',
+  :limit => 10
+)
+</pre>
+
+<pre>
+BleacherApi::Geolocation.teams(
+  :ip => '64.55.149.162'
+)
 </pre>
 
 ### HTTP Example
 
 <pre>
-http://bleacherreport.com/api/geolocation/teams.json?city=Dallas&state=Texas&country=USA
+http://bleacherreport.com/api/geolocation/teams.json?city=Dallas&dma=623&state=Texas&country=USA&limit=10
+</pre>
+
+<pre>
+http://bleacherreport.com/api/geolocation/teams.json?ip=64.55.149.162
 </pre>
 
 GET /api/stream/first.json
