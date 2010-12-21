@@ -136,10 +136,20 @@ The <code>api</code> value contains extra information especially for the API. Ex
 
 <pre>
 {
-  "teams":[
-    {"image":"dallas_mavericks.png","permalink":"dallas-mavericks"},
-    {"image":"dallas_cowboys.png","permalink":"dallas-cowboys"}
-  ]
+  "teams": {
+    "Dallas Mavericks": {
+      "uniqueName": "dallas-mavericks",
+      "logo": "dallas_mavericks.png",
+      "displayName": "Dallas Mavericks",
+      "shortName": "Mavericks"
+    },
+    "Dallas Cowboys": {
+      "uniqueName": "dallas-cowboys",
+      "logo": "dallas_cowboys.png",
+      "displayName": "Dallas Cowboys",
+      "shortName": "Cowboys"
+    }
+  }
 }
 </pre>
 
