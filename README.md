@@ -44,7 +44,7 @@ GET /api/geolocation/teams.json
 * city
 * state
 * country
-* ip - IP Address (defaults to IP of requesting machine)
+* ip - IP Address (defaults to IP of requesting machine, only used if city, state, country, and dma are empty)
 * dma - Designated Market Area code
 * limit - Limit number of results (defaults to 5)
 
