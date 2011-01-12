@@ -106,6 +106,10 @@ http://bleacherreport.com/api/geolocation/teams.json?city=Dallas&dma=623&state=T
 http://bleacherreport.com/api/geolocation/teams.json?ip=64.55.149.162
 </pre>
 
+<pre>
+http://bleacherreport.com/api/geolocation/teams.json?lat=37.787082&long=-122.400929
+</pre>
+
 GET /api/stream/first.json
 --------------------------
 
