@@ -37,8 +37,8 @@ describe BleacherApi do
   
   if only?(:Geolocation)
     describe :Geolocation do
+      
       before(:all) do
-        @response = BleacherApi::Geolocation.teams(:city => 'Dallas')
         @keys = [
           "Dallas Mavericks",
           "Texas Tech Football",
@@ -49,13 +49,35 @@ describe BleacherApi do
         @child_keys = [ "shortName", "displayName", "logo", "uniqueName" ]
       end
       
-      it "should return a hash with the proper keys" do
-        (@response.keys - @keys).should == []
+      describe :city do
+        before(:all) do
+          @response = BleacherApi::Geolocation.teams(:city => 'Dallas')
+        end
+      
+        it "should return a hash with the proper keys" do
+          (@response.keys - @keys).should == []
+        end
+      
+        it "should return a hash of hashes with the proper keys" do
+          @keys.each do |key|
+            (@response[key].keys - @child_keys).should == []
+          end
+        end
       end
       
-      it "should return a hash of hashes with the proper keys" do
-        @keys.each do |key|
-          (@response[key].keys - @child_keys).should == []
+      describe 'lat/long' do
+        before(:all) do
+          @response = BleacherApi::Geolocation.teams(:lat => "32.778155", :long => "-96.795404")
+        end
+      
+        it "should return a hash with the proper keys" do
+          (@response.keys - @keys).should == []
+        end
+      
+        it "should return a hash of hashes with the proper keys" do
+          @keys.each do |key|
+            (@response[key].keys - @child_keys).should == []
+          end
         end
       end
     end
