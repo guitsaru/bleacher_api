@@ -52,7 +52,24 @@ All parameters are optional.
 
 ### Returns
 
-An array of team permalinks.
+A hash of team information, similar to the team information in the <a href="#user_api">User API</a>:
+
+<pre>
+{
+  "Dallas Mavericks": {
+    "uniqueName": "dallas-mavericks",
+    "logo": "dallas_mavericks.png",
+    "displayName": "Dallas Mavericks",
+    "shortName": "Mavericks"
+  },
+  "Dallas Cowboys": {
+    "uniqueName": "dallas-cowboys",
+    "logo": "dallas_cowboys.png",
+    "displayName": "Dallas Cowboys",
+    "shortName": "Cowboys"
+  }
+}
+</pre>
 
 ### Ruby Examples
 
@@ -69,6 +86,13 @@ BleacherApi::Geolocation.teams(
 <pre>
 BleacherApi::Geolocation.teams(
   :ip => '64.55.149.162'
+)
+</pre>
+
+<pre>
+BleacherApi::Geolocation.teams(
+  :lat => '37.787082',
+  :long => '-122.400929'
 )
 </pre>
 

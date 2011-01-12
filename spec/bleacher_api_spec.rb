@@ -39,12 +39,24 @@ describe BleacherApi do
     describe :Geolocation do
       before(:all) do
         @response = BleacherApi::Geolocation.teams(:city => 'Dallas')
-        @permalinks = ["dallas-cowboys","tcu-football","texas-tech-football","dallas-mavericks","texas-rangers"]
+        @keys = [
+          "Dallas Mavericks",
+          "Texas Tech Football",
+          "Dallas Cowboys",
+          "Texas Rangers",
+          "TCU Football"
+        ]
+        @child_keys = [ "shortName", "displayName", "logo", "uniqueName" ]
       end
-  
-      it "should return permalinks" do
-        @response.length.should == @permalinks.length
-        (@response - @permalinks).should == []
+      
+      it "should return a hash with the proper keys" do
+        (@response.keys - @keys).should == []
+      end
+      
+      it "should return a hash of hashes with the proper keys" do
+        @keys.each do |key|
+          (@response[key].keys - @child_keys).should == []
+        end
       end
     end
   end
