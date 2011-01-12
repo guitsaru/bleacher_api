@@ -190,3 +190,18 @@ BleacherApi::User.user('token')
 <pre>
 http://bleacherreport.com/api/user/user.json?token=TOKEN_OBTAINED_FROM_LOGIN_GOES_HERE
 </pre>
+
+Running Specs
+-------------
+
+Here is an example of the options available when running the specs:
+
+<pre>
+LOGIN=user@user.com PASSWORD=password URL=http://localhost ONLY=geolocation spec spec
+</pre>
+
+<code>LOGIN</code> and <code>PASSWORD</code> are required.
+
+<code>URL</code> defaults to "http://bleacherreport.com".
+
+<code>ONLY</code> is optional, and allows you to only run a specific group of specs.
