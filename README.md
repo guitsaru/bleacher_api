@@ -10,6 +10,33 @@ Requirements
 gem install bleacher_api
 </pre>
 
+POST /api/article/article.json
+------------------------------
+
+### Parameters
+
+* id - Article ID (required)
+* article - When given any value, action includes article body in JSON output
+* article[entry_id] - Changes article body to a quick hit or live blog entry
+* comments[page] - When given a page number, action includes comments in JSON output
+* related_content - When given any value, action includes related content in JSON output
+
+### Returns
+
+An object with any of the following keys: article, comments, related_content.
+
+### Ruby Example
+
+<pre>
+BleacherApi::Article.article(595888, :article => true, :comments => { :page => 1 }, :related_content => true)
+</pre>
+
+### HTTP Example
+
+<pre>
+http://bleacherreport.com/api/article/article.json?id=595888&article=1&comments[page]=1&related_content=1
+</pre>
+
 POST /api/authenticate/login.json
 ---------------------------------
 
