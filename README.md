@@ -25,6 +25,8 @@ POST /api/article/article.json
 
 An object with any of the following keys: article, comments, related_content.
 
+The article value is an object with the keys body and object.
+
 ### Ruby Example
 
 <pre>
@@ -135,6 +137,30 @@ http://bleacherreport.com/api/geolocation/teams.json?ip=64.55.149.162
 
 <pre>
 http://bleacherreport.com/api/geolocation/teams.json?lat=37.787082&long=-122.400929
+</pre>
+
+POST /api/related/channel.json
+------------------------------
+
+### Parameters
+
+* article\_id - Article ID, must be present if no tag\_id specified
+* tag\_id - Tag ID, must be present if no article\_id specified
+
+### Returns
+
+An array of article objects with the following keys: permalink, channel\_primary\_image, and title.
+
+### Ruby Example
+
+<pre>
+BleacherApi::Related.channel(:article_id => 595888)
+</pre>
+
+### HTTP Example
+
+<pre>
+http://bleacherreport.com/api/related/channel.json?article_id=595888
 </pre>
 
 GET /api/stream/first.json
