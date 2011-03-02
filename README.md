@@ -146,6 +146,7 @@ POST /api/related/channel.json
 
 * article\_id - Article ID, must be present if no tag\_id specified
 * tag\_id - Tag ID, must be present if no article\_id specified
+* page - Optional
 
 ### Returns
 
@@ -154,13 +155,13 @@ An array of article objects with the following keys: permalink, channel\_primary
 ### Ruby Example
 
 <pre>
-BleacherApi::Related.channel(:article_id => 595888)
+BleacherApi::Related.channel(:article_id => 595888, :page => 2)
 </pre>
 
 ### HTTP Example
 
 <pre>
-http://bleacherreport.com/api/related/channel.json?article_id=595888
+http://bleacherreport.com/api/related/channel.json?article_id=595888&page=2
 </pre>
 
 GET /api/stream/first.json
