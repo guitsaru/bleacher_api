@@ -177,6 +177,8 @@ POST /api/related/channel\_next.json
 
 An array of article objects with the following keys: permalink, channel\_primary\_image\_150x100, and dynamic_hook.
 
+These article objects represent the next items in the channel (after the passed `article_id`).
+
 ### Ruby Example
 
 <pre>
