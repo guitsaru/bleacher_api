@@ -49,6 +49,18 @@ class BleacherApi
     end
   end
   
+  class Related
+    class <<self
+      def channel(options)
+        BleacherApi.call(:get, 'related/channel', options)
+      end
+      
+      def channel_next(options)
+        BleacherApi.call(:get, 'related/channel_next', options)
+      end
+    end
+  end
+  
   class Stream
     class <<self
       def first(*tags)
