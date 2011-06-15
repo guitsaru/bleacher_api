@@ -258,6 +258,7 @@ Each value of that object is another object with the following keys:
 * title
 * published_at
 * image
+* label
 
 This object represents the first item in that team's stream.
 
