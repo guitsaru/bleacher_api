@@ -32,6 +32,7 @@ GET /api/article/article.json
 * id - Article ID (required)
 * article - When given any value, action includes article body in JSON output
 * article[entry_id] - Changes article body to a quick hit or live blog entry
+* article[only] - When given comma-separated parameters, returns only values for the parameters in JSON output
 * comments[page] - When given a page number, action includes comments in JSON output
 * related_content - When given any value, action includes related content in JSON output
 
