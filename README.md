@@ -10,8 +10,8 @@ Requirements
 gem install bleacher_api
 </pre>
 
-POST /api/article/article.json
-------------------------------
+GET /api/article/article.json
+-----------------------------
 
 ### Parameters
 
@@ -64,6 +64,31 @@ http://bleacherreport.com/api/authenticate/login.json?user[email]=your@email.com
 </pre>
 
 Please note that any request with a password should be sent as a POST, despite this example using GET.
+
+GET /api/front/lead_articles.json
+---------------------------------
+
+### Parameters
+
+* limit - Optional
+
+### Returns
+
+An array of article objects with the following keys: permalink, primary\_image\_650x440, and title.
+
+The array of articles represents the articles currently on the lead module of the front page.
+
+### Ruby Example
+
+<pre>
+BleacherApi::Front.lead_articles(:limit => 2)
+</pre>
+
+### HTTP Example
+
+<pre>
+http://bleacherreport.com/api/front/lead_articles.json?limit=2
+</pre>
 
 GET /api/geolocation/teams.json
 -------------------------------
@@ -139,8 +164,8 @@ http://bleacherreport.com/api/geolocation/teams.json?ip=64.55.149.162
 http://bleacherreport.com/api/geolocation/teams.json?lat=37.787082&long=-122.400929
 </pre>
 
-POST /api/related/channel.json
-------------------------------
+GET /api/related/channel.json
+-----------------------------
 
 ### Parameters
 
@@ -164,8 +189,8 @@ BleacherApi::Related.channel(:article_id => 595888, :page => 2)
 http://bleacherreport.com/api/related/channel.json?article_id=595888&page=2
 </pre>
 
-POST /api/related/channel\_next.json
---------------------------------------
+GET /api/related/channel\_next.json
+-----------------------------------
 
 ### Parameters
 

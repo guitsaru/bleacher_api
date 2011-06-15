@@ -41,6 +41,14 @@ class BleacherApi
     end
   end
   
+  class Front
+    class <<self
+      def lead_articles(options)
+        BleacherApi.call(:get, 'front/lead_articles', options)
+      end
+    end
+  end
+  
   class Geolocation
     class <<self
       def teams(options)
