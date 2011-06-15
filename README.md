@@ -10,6 +10,20 @@ Requirements
 gem install bleacher_api
 </pre>
 
+Table of Contents
+-----------------
+
+* [GET /api/article/article.json](#article_article)
+* [POST /api/authenticate/login.json](#authenticate_login)
+* [GET /api/front/lead_articles.json](#front_lead_articles)
+* [GET /api/geolocation/teams.json](#geolocation_teams)
+* [GET /api/related/channel.json](#related_channel)
+* [GET /api/related/channel_next.json](#related_channel_next)
+* [GET /api/stream/first.json](#stream_first)
+* [GET /api/user/user.json](#user_user)
+
+<a name="article_article"></a>
+
 GET /api/article/article.json
 -----------------------------
 
@@ -39,6 +53,8 @@ BleacherApi::Article.article(595888, :article => true, :comments => { :page => 1
 http://bleacherreport.com/api/article/article.json?id=595888&article=1&comments[page]=1&related_content=1
 </pre>
 
+<a name="authenticate_login"></a>
+
 POST /api/authenticate/login.json
 ---------------------------------
 
@@ -49,7 +65,7 @@ POST /api/authenticate/login.json
 
 ### Returns
 
-Output similar to the <a href="#user_api">User API</a>.
+Output similar to the <a href="#user_user">User API</a>.
 
 ### Ruby Example
 
@@ -64,6 +80,8 @@ http://bleacherreport.com/api/authenticate/login.json?user[email]=your@email.com
 </pre>
 
 Please note that any request with a password should be sent as a POST, despite this example using GET.
+
+<a name="front_lead_articles"></a>
 
 GET /api/front/lead_articles.json
 ---------------------------------
@@ -90,6 +108,8 @@ BleacherApi::Front.lead_articles(:limit => 2)
 http://bleacherreport.com/api/front/lead_articles.json?limit=2
 </pre>
 
+<a name="geolocation_teams"></a>
+
 GET /api/geolocation/teams.json
 -------------------------------
 
@@ -106,7 +126,7 @@ All parameters are optional.
 
 ### Returns
 
-A hash of team information, similar to the team information in the <a href="#user_api">User API</a>:
+A hash of team information, similar to the team information in the <a href="#user_user">User API</a>:
 
 <pre>
 {
@@ -164,6 +184,8 @@ http://bleacherreport.com/api/geolocation/teams.json?ip=64.55.149.162
 http://bleacherreport.com/api/geolocation/teams.json?lat=37.787082&long=-122.400929
 </pre>
 
+<a name="related_channel"></a>
+
 GET /api/related/channel.json
 -----------------------------
 
@@ -189,8 +211,10 @@ BleacherApi::Related.channel(:article_id => 595888, :page => 2)
 http://bleacherreport.com/api/related/channel.json?article_id=595888&page=2
 </pre>
 
-GET /api/related/channel\_next.json
------------------------------------
+<a name="related_channel_next"></a>
+
+GET /api/related/channel_next.json
+----------------------------------
 
 ### Parameters
 
@@ -215,6 +239,8 @@ BleacherApi::Related.channel_next(:article_id => 595888, :tag_id => 19, :limit =
 <pre>
 http://bleacherreport.com/api/related/channel_next.json?article_id=696286&tag_id=19&limit=2
 </pre>
+
+<a name="stream_first"></a>
 
 GET /api/stream/first.json
 --------------------------
@@ -247,7 +273,7 @@ BleacherApi::Stream.first('san-francisco-49ers')
 http://bleacherreport.com/api/stream/first.json?tags=san-francisco-49ers,dallas-cowboys
 </pre>
 
-<a name="user_api"></a>
+<a name="user_user"></a>
 
 GET /api/user/user.json
 -----------------------
