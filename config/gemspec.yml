@@ -1,0 +1,13 @@
+name: bleacher_api
+version: 0.1.0
+authors:
+  - Bleacher Report
+email: wwelsh@bleacherreport.com
+homepage: http://bleacherreport.com
+summary: A Ruby Interface to the Bleacher Report API
+description: A Ruby Interface to the Bleacher Report API
+dependencies:
+  - httparty
+development_dependencies:
+  - rake
+  - rspec

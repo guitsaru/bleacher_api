@@ -87,7 +87,7 @@ describe BleacherApi do
     describe :Stream do
       before(:all) do
         @response = BleacherApi::Stream.first('san-francisco-49ers')
-        @keys = %w(title published_at image)
+        @keys = %w(label title published_at image)
       end
   
       it "should return hash with valid keys" do

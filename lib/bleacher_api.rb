@@ -1,13 +1,12 @@
 require File.dirname(__FILE__) + '/bleacher_api/gems'
 
-BleacherApi::Gems.require(:lib)
+BleacherApi::Gems.activate %w(httparty)
 
 require 'httparty'
 
 $:.unshift File.dirname(__FILE__)
 
 require 'bleacher_api/config'
-require 'bleacher_api/version'
 
 class BleacherApi
   include HTTParty

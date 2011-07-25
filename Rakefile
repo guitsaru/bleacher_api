@@ -1,23 +1,19 @@
 require File.dirname(__FILE__) + '/lib/bleacher_api/gems'
 
-BleacherApi::Gems.require(:rake)
+BleacherApi::Gems.activate %w(rake rspec)
 
 require 'rake'
-require 'rake/gempackagetask'
-require 'spec/rake/spectask'
+
+begin
+  require 'spec/rake/spectask'
+rescue Exception => e
+end
 
 def gemspec
   @gemspec ||= begin
     file = File.expand_path('../bleacher_api.gemspec', __FILE__)
     eval(File.read(file), binding, file)
   end
-end
-
-if defined?(Rake::GemPackageTask)
-  Rake::GemPackageTask.new(gemspec) do |pkg|
-    pkg.gem_spec = gemspec
-  end
-  task :gem => :gemspec
 end
 
 if defined?(Spec::Rake::SpecTask)
@@ -28,33 +24,60 @@ if defined?(Spec::Rake::SpecTask)
     t.warning = true
   end
   task :spec
+  task :default => :spec
+end
+
+desc "Build gem(s)"
+task :gem do
+  old_gemset = ENV['GEMSET']
+  root = File.expand_path('../', __FILE__)
+  pkg = "#{root}/pkg"
+  system "rm -Rf #{pkg}"
+  BleacherApi::Gems.gemset_names.each do |gemset|
+    ENV['GEMSET'] = gemset.to_s
+    system "cd #{root} && gem build bleacher_api.gemspec"
+    system "mkdir -p #{pkg} && mv *.gem pkg"
+  end
+  ENV['GEMSET'] = old_gemset
+end
+
+namespace :gem do
+  desc "Install gem(s)"
+  task :install do
+    Rake::Task['gem'].invoke
+    Dir["#{File.dirname(__FILE__)}/pkg/*.gem"].each do |pkg|
+      system "gem install #{pkg} --no-ri --no-rdoc"
+    end
+  end
+  
+  desc "Push gem(s)"
+  task :push do
+    Rake::Task['gem'].invoke
+    Dir["#{File.dirname(__FILE__)}/pkg/*.gem"].each do |pkg|
+      system "gem push #{pkg}"
+    end
+  end
 end
 
 namespace :gems do
-  desc "Install gems (DEV=1|0 DOCS=1|0 SUDO=1|0)"
+  desc "Install gem dependencies (DEV=0 DOCS=0 GEMSPEC=default SUDO=0)"
   task :install do
-    file = File.dirname(__FILE__) + '/gems'
-    sudo = (ENV['SUDO'] ||= '0').to_i
-    docs = (ENV['DOCS'] ||= '0').to_i
-    sudo = sudo == 1 ? 'sudo' : ''
-    docs = docs == 1 ? '' : '--no-ri --no-rdoc'
-    gems = []
+    dev = ENV['DEV'] == '1'
+    docs = ENV['DOCS'] == '1' ? '' : '--no-ri --no-rdoc'
+    gemset = ENV['GEMSET']
+    sudo = ENV['SUDO'] == '1' ? 'sudo' : ''
     
-    if File.exists?(file)
-      File.open(file, 'r') do |f|
-        gems = f.readlines.collect do |line|
-          line.split(' ')
-        end
-      end
+    BleacherApi::Gems.gemset = gemset if gemset
+    
+    if dev
+      gems = BleacherApi::Gems.gemspec.development_dependencies
     else
-      gems = BleacherApi::Gems::TYPES[:gemspec]
-      gems = BleacherApi::Gems::TYPES[:gemspec_dev] if ENV['DEV'] == '1'
-      gems.collect! do |g|
-        [ g.to_s, BleacherApi::Gems::VERSIONS[g] ]
-      end
+      gems = BleacherApi::Gems.gemspec.dependencies
     end
     
-    gems.each do |(name, version)|      
+    gems.each do |name|
+      name = name.to_s
+      version = BleacherApi::Gems.versions[name.to_sym]
       if Gem.source_index.find_name(name, version).empty?
         version = version ? "-v #{version}" : ''
         system "#{sudo} gem install #{name} #{version} #{docs}"
@@ -65,41 +88,7 @@ namespace :gems do
   end
 end
 
-desc "Install gem locally"
-task :install => :package do
-  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version}}
-end
-
 desc "Validate the gemspec"
 task :gemspec do
   gemspec.validate
-end
-
-task :package => :gemspec
-task :default => :spec
-
-# DELETE AFTER USING
-desc "Rename project"
-task :rename do
-  name = ENV['NAME'] || File.basename(Dir.pwd)
-  camelize = lambda do |str|
-    str.to_s.gsub(/\/(.?)/) { "::#{$1.upcase}" }.gsub(/(?:^|_)(.)/) { $1.upcase }
-  end
-  dir = Dir['**/bleacher_api*']
-  begin
-    from = dir.pop
-    if from
-      to = from.split('/')
-      to[-1].gsub!('bleacher_api', name)
-      FileUtils.mv(from, to.join('/'))
-    end
-  end while dir.length > 0
-  Dir["**/*"].each do |path|
-    if File.file?(path)
-      `sed -i '' 's/bleacher_api/#{name}/g' #{path}`
-      `sed -i '' 's/BleacherApi/#{camelize.call(name)}/g' #{path}`
-      no_space = File.read(path).gsub(/\s+\z/, '')
-      File.open(path, 'w') { |f| f.write(no_space) }
-    end
-  end
 end
