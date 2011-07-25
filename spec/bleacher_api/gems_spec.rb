@@ -240,6 +240,7 @@ describe BleacherApi::Gems do
     end
   
     it "should produce a valid gemspec" do
+      require 'rubygems/user_interaction'
       BleacherApi::Gems.gemset = :default
       gemspec = File.expand_path("../../../bleacher_api.gemspec", __FILE__)
       gemspec = eval(File.read(gemspec), binding, gemspec)
