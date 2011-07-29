@@ -14,7 +14,8 @@ Table of Contents
 -----------------
 
 * [GET /api/article/article.json](#article_article)
-* [POST /api/authenticate/login.json](#authenticate_login)
+* [GET /api/authenticate/login](#authenticate_login)
+* [POST /api/authenticate/login.json](#authenticate_login_post)
 * [GET /api/authenticate/logout.json](#authenticate_logout)
 * [GET /api/authenticate/signup](#authenticate_signup)
 * [GET /api/front/lead_articles.json](#front_lead_articles)
@@ -76,6 +77,8 @@ http://bleacherreport.com/api/authenticate/login?redirect_url=http://bleacherrep
 
 A `redirect_url` parameter is mandatory. B/R will redirect the request back to that URL, passing basic information
 from the <a href="#user_user">User API</a> as GET parameters.
+
+<a name="authenticate_login_post"></a>
 
 POST /api/authenticate/login.json
 ---------------------------------
