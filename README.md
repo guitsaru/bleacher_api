@@ -139,7 +139,7 @@ An HTML page with a sign up form.
 ### HTTP Example
 
 <pre>
-http://bleacherreport.com/api/authenticate/signup
+http://bleacherreport.com/api/authenticate/signup?redirect_url=http://bleacherreport.com&type=fantasy
 </pre>
 
 ### Redirect
