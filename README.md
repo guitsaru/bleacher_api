@@ -16,6 +16,7 @@ Table of Contents
 * [GET /api/article/article.json](#article_article)
 * [POST /api/authenticate/login.json](#authenticate_login)
 * [GET /api/authenticate/logout.json](#authenticate_logout)
+* [GET /api/authenticate/signup](#authenticate_signup)
 * [GET /api/front/lead_articles.json](#front_lead_articles)
 * [GET /api/geolocation/teams.json](#geolocation_teams)
 * [GET /api/related/channel.json](#related_channel)
