@@ -27,15 +27,20 @@ class BleacherApi
   
   class Authenticate
     class <<self
-      def login(email, password)
+      def login(email, password, redirect=nil)
         result = BleacherApi.call(:post, 'authenticate/login', {
           'user[email]' => email,
-          'user[password]' => password
+          'user[password]' => password,
+          'redirect' => nil
         })
         if result
           BleacherApi::Config.token result['token']
         end
         result
+      end
+
+      def logout
+        BleacherApi.call(:get, 'authenticate/logout')
       end
     end
   end

@@ -8,26 +8,40 @@ describe BleacherApi do
   
   if only?(:Authenticate)
     describe :Authenticate do
-      describe 'success' do
-        before(:all) do
-          @response = BleacherApi::Authenticate.login(ENV['LOGIN'], ENV['PASSWORD'])
-        end
-    
-        it "should return a hash with valid keys" do
-          @response.keys.length.should == @user_keys.length
-          (@response.keys - @user_keys).should == []
+      describe :login do
+        
+        describe 'success' do
+          before(:all) do
+            @response = BleacherApi::Authenticate.login(ENV['LOGIN'], ENV['PASSWORD'])
+          end
+      
+          it "should return a hash with valid keys" do
+            @response.keys.length.should == @user_keys.length
+            (@response.keys - @user_keys).should == []
+          end
+        
+          it "should set Config.token" do
+            BleacherApi::Config.token.should == @response['token']
+          end
         end
       
-        it "should set Config.token" do
-          BleacherApi::Config.token.should == @response['token']
+        describe 'failure' do
+          before(:all) do
+            @response = BleacherApi::Authenticate.login('fail', 'fail')
+          end
+      
+          it "should return false" do
+            @response.should == false
+          end
         end
       end
-    
-      describe 'failure' do
+
+      describe :logout do
+
         before(:all) do
-          @response = BleacherApi::Authenticate.login('fail', 'fail')
+          @response = BleacherApi::Authenticate.logout
         end
-    
+
         it "should return false" do
           @response.should == false
         end

@@ -15,6 +15,7 @@ Table of Contents
 
 * [GET /api/article/article.json](#article_article)
 * [POST /api/authenticate/login.json](#authenticate_login)
+* [GET /api/authenticate/logout.json](#authenticate_logout)
 * [GET /api/front/lead_articles.json](#front_lead_articles)
 * [GET /api/geolocation/teams.json](#geolocation_teams)
 * [GET /api/related/channel.json](#related_channel)
@@ -62,6 +63,7 @@ POST /api/authenticate/login.json
 
 * user[email]
 * user[password]
+* redirect_url (optional)
 
 ### Returns
 
@@ -80,6 +82,68 @@ http://bleacherreport.com/api/authenticate/login.json?user[email]=your@email.com
 </pre>
 
 Please note that any request with a password should be sent as a POST, despite this example using GET.
+
+### Redirect
+
+When a `redirect_url` parameter is specified, B/R will redirect the request back to that URL, passing basic information
+from the <a href="#user_user">User API</a> as GET parameters.
+
+If the login fails, B/R will redirect the request back to the URL with a `fail=1` GET parameter.
+
+<a name="authenticate_logout"></a>
+
+GET /api/authenticate/logout.json
+---------------------------------
+
+### Parameters
+
+* redirect_url (optional)
+
+### Returns
+
+Returns `true` if succeeded, `false` if not.
+
+### Ruby Example
+
+<pre>
+BleacherApi::Authenticate.logout
+</pre>
+
+### HTTP Example
+
+<pre>
+http://bleacherreport.com/api/authenticate/logout.json
+</pre>
+
+### Redirect
+
+When a `redirect_url` parameter is specified, B/R will redirect the request back to that URL, passing a `fail=1` parameter
+if the logout failed.
+
+<a name="authenticate_signup"></a>
+
+GET /api/authenticate/signup
+----------------------------
+
+### Parameters
+
+* redirect_url
+* type (optional) - Optional values for this include: "fantasy"
+
+### Returns
+
+An HTML page with a sign up form.
+
+### HTTP Example
+
+<pre>
+http://bleacherreport.com/api/authenticate/signup
+</pre>
+
+### Redirect
+
+A `redirect_url` parameter is mandatory. B/R will redirect the request back to that URL, passing basic information
+from the <a href="#user_user">User API</a> as GET parameters.
 
 <a name="front_lead_articles"></a>
 
