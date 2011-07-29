@@ -58,6 +58,25 @@ http://bleacherreport.com/api/article/article.json?id=595888&article=1&comments[
 
 <a name="authenticate_login"></a>
 
+GET /api/authenticate/login
+---------------------------
+
+### Parameters
+
+* redirect_url
+* type (optional) - Optional values for this include: "fantasy"
+
+### HTTP Example
+
+<pre>
+http://bleacherreport.com/api/authenticate/login?redirect_url=http://bleacherreport.com&type=fantasy
+</pre>
+
+### Redirect
+
+A `redirect_url` parameter is mandatory. B/R will redirect the request back to that URL, passing basic information
+from the <a href="#user_user">User API</a> as GET parameters.
+
 POST /api/authenticate/login.json
 ---------------------------------
 
@@ -65,7 +84,6 @@ POST /api/authenticate/login.json
 
 * user[email]
 * user[password]
-* redirect_url (optional)
 
 ### Returns
 
@@ -84,13 +102,6 @@ http://bleacherreport.com/api/authenticate/login.json?user[email]=your@email.com
 </pre>
 
 Please note that any request with a password should be sent as a POST, despite this example using GET.
-
-### Redirect
-
-When a `redirect_url` parameter is specified, B/R will redirect the request back to that URL, passing basic information
-from the <a href="#user_user">User API</a> as GET parameters.
-
-If the login fails, B/R will redirect the request back to the URL with a `fail=1` GET parameter.
 
 <a name="authenticate_logout"></a>
 
