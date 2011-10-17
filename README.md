@@ -37,6 +37,7 @@ GET /api/article/article.json
 * article[entry_id] - Changes article body to a quick hit or live blog entry
 * article[only] - When given comma-separated parameters, returns only values for the parameters in JSON output
 * comments[page] - When given a page number, action includes comments in JSON output
+* comments[order] = When given an order (in sql syntax), action includes comments in JSON output sorted by order
 * related_content - When given any value, action includes related content in JSON output
 
 ### Returns
