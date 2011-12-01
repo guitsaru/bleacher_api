@@ -183,7 +183,7 @@ primary\_image\_311x210 and title.
 
 The array of articles represents the articles currently on the lead module of the front page.
 
-For app version >= '1.4' and devicetype = 'ipad', specifying one or more tags will
+For appversion >= '1.4' and devicetype = 'ipad', specifying one or more tags will
 return an array of articles, with the articles currently on the lead module of the front
 page merged with articles from the team streams of the specified teams.
 
@@ -197,7 +197,7 @@ BleacherApi::Front.lead_articles(:limit => 2)
 
 <pre>
 http://bleacherreport.com/api/front/lead_articles.json?limit=2
-http://bleacherreport.com/api/front/lead_articles.json?tags=san-francisco-49ers,oakland-raiders&devicetype=ipad&appversion=1.3.2&page=1&perpage=10
+http://bleacherreport.com/api/front/lead_articles.json?tags=san-francisco-49ers,oakland-raiders&devicetype=ipad&appversion=1.4&page=1&perpage=10
 </pre>
 
 <a name="geolocation_teams"></a>
