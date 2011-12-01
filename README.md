@@ -169,13 +169,23 @@ GET /api/front/lead_articles.json
 
 ### Parameters
 
-* limit - Optional
+* tags - Optional; comma separated list of team permalinks
+* devicetype - Optional; currently supports 'ipad'
+* appversion - Optional; 
+* page - Optional
+* perpage - Optional
+* limit - Optional; deprecated - use perpage
 
 ### Returns
 
-An array of article objects with the following keys: permalink, primary\_image\_650x440, and title.
+An array of article objects with the following keys: permalink, primary\_image\_650x440, 
+primary\_image\_311x210 and title.
 
 The array of articles represents the articles currently on the lead module of the front page.
+
+For app version >= '1.4' and devicetype = 'ipad', specifying one or more tags will
+return an array of articles, with the articles currently on the lead module of the front
+page merged with articles from the team streams of the specified teams.
 
 ### Ruby Example
 
@@ -187,6 +197,7 @@ BleacherApi::Front.lead_articles(:limit => 2)
 
 <pre>
 http://bleacherreport.com/api/front/lead_articles.json?limit=2
+http://bleacherreport.com/api/front/lead_articles.json?tags=san-francisco-49ers,oakland-raiders&devicetype=ipad&appversion=1.3.2&page=1&perpage=10
 </pre>
 
 <a name="geolocation_teams"></a>
