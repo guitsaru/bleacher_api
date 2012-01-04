@@ -19,6 +19,7 @@ Table of Contents
 * [GET /api/authenticate/logout.json](#authenticate_logout)
 * [GET /api/authenticate/signup](#authenticate_signup)
 * [GET /api/front/lead_articles.json](#front_lead_articles)
+* [GET /api/front/v2/lead_articles.json](#front_lead_articles_v2)
 * [GET /api/geolocation/teams.json](#geolocation_teams)
 * [GET /api/related/channel.json](#related_channel)
 * [GET /api/related/channel_next.json](#related_channel_next)
@@ -179,7 +180,7 @@ GET /api/front/lead_articles.json
 ### Returns
 
 An array of article objects with the following keys: permalink, primary\_image\_650x440, 
-primary\_image\_311x210 and title.
+primary\_image\_311x210, title and tag (the tag of the teamstream from which the article came).
 
 The array of articles represents the articles currently on the lead module of the front page.
 
@@ -202,6 +203,73 @@ http://bleacherreport.com/api/front/lead_articles.json?tags=san-francisco-49ers,
 
 <a name="geolocation_teams"></a>
 
+<a name="front_lead_articles_v2"></a>
+GET /api/front/v2/lead_articles.json
+------------------------------------
+
+### Parameters
+* tags - Optional; comma separated list of team permalinks
+* devicetype - Optional; currently supports 'ipad'
+* appversion - Optional
+* page - Optional
+* perpage - Optional; default 5
+
+### Returns
+
+An object containing: 1) a variable with the maximun number of articles available for the query, disregarding
+the perpage parameter, and 2) an array of article objects with the following keys: permalink, primary\_image\_650x440, 
+primary\_image\_311x210, title and tag (the tag of the teamstream from which the article came).
+
+The array of articles represents the articles currently on the lead module of the front page.
+
+For devicetype = 'ipad', specifying one or more tags will
+return an array of articles, with the articles currently on the lead module of the front
+page merged with articles from the team streams of the specified teams.
+
+<pre>
+{
+  all_articles: 53,
+  articles: 
+    [
+      {
+        permalink: "979252-nba-rumors-roundup-chris-paul-to-clippers-latest-on-dwight-howard-and-more",
+        primary_image_311x210: "http://img.bleacherreport.net/img/images/photos/001/484/347/326afbbaae76d91b000f6a706700345b_0_original_crop_exact.jpg?w=311&h=210&q=85",
+        title: "NBA Trade Rumor Roundup ",
+        primary_image_650x440: "http://img.bleacherreport.net/img/images/photos/001/484/347/326afbbaae76d91b000f6a706700345b_0_original_crop_exact.jpg?w=650&h=440&q=85"
+      },
+      {
+        primary_image_650x440: "http://img.bleacherreport.net/img/images/photos/001/484/172/135247305_crop_exact.jpg?w=650&h=440&q=85",
+        title: "Crabtree and Edwards Steam after Loss",
+        tag: "san-francisco-49ers",
+        permalink: "http://www.csnbayarea.com/blog/niners-talk/post/49ers-frustration-evident-after-loss-to-?blockID=610322",
+        primary_image_311x210: "http://img.bleacherreport.net/img/images/photos/001/484/172/135247305_crop_exact.jpg?w=311&h=210&q=85"
+      },
+      {
+        primary_image_650x440: "http://img.bleacherreport.net/img/images/photos/001/483/828/135507905_crop_exact.jpg?w=650&h=440&q=85",
+        title: "Ask the Experts: Is Carson Palmer the Long-Term Answer for the Raiders?",
+        tag: "oakland-raiders",
+        permalink: "979066-ask-the-experts-is-carson-palmer-the-long-term-answer-for-the-raiders",
+        primary_image_311x210: "http://img.bleacherreport.net/img/images/photos/001/483/828/135507905_crop_exact.jpg?w=311&h=210&q=85"
+      },
+      ...
+    ]
+}
+</pre>
+
+### Ruby Example
+
+<pre>
+BleacherApi::Front.lead_articles(:limit => 2)
+</pre>
+
+### HTTP Example
+
+<pre>
+http://bleacherreport.com/api/front/v2/lead_articles.json?limit=2
+http://bleacherreport.com/api/front/v2/lead_articles.json?tags=san-francisco-49ers,oakland-raiders&devicetype=ipad&appversion=1.4&page=1&perpage=10
+</pre>
+
+<a name="geolocation_teams"></a>
 GET /api/geolocation/teams.json
 -------------------------------
 
