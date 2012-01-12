@@ -25,6 +25,14 @@ class BleacherApi
     end
   end
   
+  class Article
+    class <<self
+      def article(id, options={})
+        BleacherApi.call(:get, 'article/article', options.merge(:id => id))
+      end
+    end
+  end
+
   class Authenticate
     class <<self
       def login(email, password, redirect=nil)

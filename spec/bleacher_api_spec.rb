@@ -5,6 +5,23 @@ describe BleacherApi do
   before(:all) do
     @user_keys = %w(id email first_name last_name permalink token api)
   end
+
+  if only?(:Article)
+    describe :Article do
+      describe :article do
+        
+        describe 'success' do
+          before(:all) do
+            @response = BleacherApi::Article.article(1020834, :article => true)
+          end
+
+          it "should return a hash with valid keys" do
+            @response.keys.should == ["article"]
+          end
+        end
+      end
+    end
+  end
   
   if only?(:Authenticate)
     describe :Authenticate do
